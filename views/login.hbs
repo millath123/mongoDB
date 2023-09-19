@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+
+    .container {
+      background-color: #ffffff; /* Container background color */
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      width: 80%;
+      max-width: 400px;
+    }
+
+    h2 {
+      color: #3498db; /* Header text color */
+    }
+
+    form {
+      margin-top: 20px; /* Add margin to separate the form from the header */
+    }
+
+    input[type="email"],
+    input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc; /* Input border color */
+      border-radius: 5px;
+    }
+
+    .submit {
+      background-color: #3498db; /* Submit button background color */
+      color: #ffffff; /* Submit button text color */
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #2980b9; /* Submit button background color on hover */
+    }
+
+    a {
+      color: #3498db; /* Link color */
+      text-decoration: none;
+      margin-top: 10px;
+      display: block;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>LOGIN</h2>
+    <form action="/login" method="post"id="loginForm">
+      <input type="email" name="email" placeholder="Email" id="email">
+      <input type="password" name="password" placeholder="Password" id="password">
+      <button class="submit">LOGIN</button>
+    </form><br>
+    <a href="/signup">SIGN UP</a>
+  </div>
+
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const signupForm = document.getElementById("loginForm");
+
+      signupForm.addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent form submission by default
+        const emailInput = document.getElementById("email");
+        const passwordInput = document.getElementById("password");
+        
+        const email = emailInput.value.trim();
+        const password = passwordInput.value.trim();
+
+
+        // Password validation
+        const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}$/;
+        if (!passwordRegex.test(password)) {
+          alert("Password must have at least 8 characters with at least one number, one capital letter, one small letter, and one symbol.");
+          return false;
+        }
+
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+          alert("Invalid email address.");
+          return false;
+        }
+
+       
+
+         loginpForm.submit();
+
+      });
+    });
+  </script>
+
+</body>         
+</html>

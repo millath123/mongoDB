@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sign Up</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      text-align: center;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+    }
+
+    h2 {
+      color: #3498db;
+      /* Header text color */
+    }
+
+    form {
+      background-color: #ffffff;
+      /* Form background color */
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      width: 80%;
+      max-width: 400px;
+      margin: 20px;
+    }
+
+    input[type="text"],
+    input[type="password"],
+    input[type="email"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      /* Input border color */
+      border-radius: 5px;
+    }
+
+
+    .submit {
+      background-color: #3498db;
+      /* Submit button background color */
+      color: #ffffff;
+      /* Submit button text color */
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    input[type="submit"]:hover {
+      background-color: #2980b9;
+      /* Submit button background color on hover */
+    }
+
+    a {
+      color: #3498db;
+      /* Link color */
+      text-decoration: none;
+      margin-top: 10px;
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <h2>SIGN UP</h2>
+  <form action="/signup" method="post" id="signupForm">
+        <input type="text" name="name" id="name" placeholder="Name">
+        <input type="email" name="email" id="email" placeholder="Email">
+        <input type="password" name="password" id="password" placeholder="Password">
+        <input type="password" name="repassword" id="repassword" placeholder="Reenter Password">
+        <button type="submit" class="submit">Sign Up</button>
+    </form>
+    <a href="/login">LOGIN</a>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const signupForm = document.getElementById("signupForm");
+
+      signupForm.addEventListener('submit', function (event) {
+        event.preventDefault(); // Prevent form submission by default
+
+        const nameInput = document.getElementById("name");
+        const emailInput = document.getElementById("email");
+        const passwordInput = document.getElementById("password");
+        const repasswordInput = document.getElementById("repassword");
+
+        const name = nameInput.value.trim();
+        const email = emailInput.value.trim();
+        const password = passwordInput.value.trim();
+        const repassword = repasswordInput.value.trim();
+
+        // Name validation
+        if (name.length < 3) {
+          alert("Name must have at least 3 characters.");
+          return false;
+        }
+
+        // Password validation
+        const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}$/;
+        if (!passwordRegex.test(password)) {
+          alert("Password must have at least 8 characters with at least one number, one capital letter, one small letter, and one symbol.");
+          return false;
+        }
+
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+          alert("Invalid email address.");
+          return false;
+        }
+
+        // Repassword validation
+        if (repassword !== password) {
+          alert("Reentered password does not match the password.");
+          return false;
+        }
+
+         signupForm.submit();
+
+      });
+    });
+  </script>
+
+</body>
+
+</html>
